@@ -7,7 +7,7 @@ function CreateMember() {
   const nav = useNavigate()
 
   const newMember = e => {
-    e.preventDefault()
+    e.preventDefault()  //prevents the default HTML form submit behavior from taking place.
     const member = {userName: document.querySelector('#uName').value}
     createMember(member)
     nav ('/')

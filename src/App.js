@@ -21,13 +21,11 @@ function App() {
       <br/>
       <Routes>
         <Route path="/" element={<ExerciseList/>} />
-       
         <Route path="/create" element={<CreateExercise/>} />
         <Route path="/member" element={<CreateMember/>} />
         <Route path="/:id" element={<ShowExercise/>} />
         <Route path="/delete/:id" element={<DeleteExercise/>} />
-        <Route path="/edit/:id" element={<EditExercise/>} />
-       
+        <Route path="/edit/:id" element={<EditExercise/>} /> 
       </Routes>
     </Router>
     </div>
