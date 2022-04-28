@@ -24,7 +24,7 @@ export default function ExerciseList() {
             <td>{props.currentexercise.duration}</td>
             <td>{props.currentexercise.date.substring(0,10)}</td> 
             <td>
-              <Link to={"/edit/" + props.currentexercise._id}>edit</Link> | <a href="/#" onClick={() => {
+              <Link to={"/edit/" + props.currentexercise._id}>edit</Link> | <a href="/" onClick={() => {
                 props.deleteTheExercise(props.currentexercise._id)
               }}>delete</a>
             </td>
@@ -35,10 +35,11 @@ export default function ExerciseList() {
       console.log("in deleteTheExercise:", id)
         deleteExercise(id)
 
-        setExercises({
-          exercises: exercises.filter(el => el._id !== id)
-        })
-        // nav('/')
+      //   setExercises({
+      //     exercises: exercises.filter(el => el._id !== id)
+      //   })
+      //   // console.log(" filter exercises", exercises)
+      //  nav('/')
     }
 
     // exerList method returns the rows of the table
