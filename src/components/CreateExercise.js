@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {useNavigate} from "react-router-dom"
 import { createExercise, getMembers } from '../services/fitness-api'
-
+import '../index.css'
+// import '../App.css'
 
 function CreateExercise() {
   const nav = useNavigate()
-
   const [members, setMembers] = useState([])
-  const inputRef = useRef()
+  const inputRef = useRef()  // ref is used to get a reference to a DOM element
+  const inputDateRef = useRef()
 
   // Add the list of members to the state
   useEffect(() => {
@@ -16,89 +17,93 @@ function CreateExercise() {
     .then(res => setMembers(res))
 },[])
 
-  console.log("members: ", members)
+  //const names = members.map(member => member.userName)
+  // console.log("member names: ", names)
+  // var uName = names[0]
 
-  const names = members.map(member => member.userName)
-  console.log("member names: ", names)
-  var uName = names[0]
-
-  // const [member, setMember] = useState({'member': 'test user'})
-  // setMember('test user')
-
-  //const date = new Date()
-  var todayDate = new Date().toISOString().slice(0, 10)
-
+  const todayDate = new Date().toISOString().slice(0, 10)
+  var selectedDate = new Date().toISOString().slice(0, 10)
   
   const newExercise = e => {
-    e.preventDefault()   // prevents the default HTML form submit behavior from taking place.
-    
-    // const exercise = {userName: document.querySelector('#uName').value,
-    // description: document.querySelector('#desc').value,
-    // duration: document.querySelector('#dur').value,
-    // date: document.querySelector('#date').value}
-
+    e.preventDefault()   // prevents the default HTML form submit behavior from taking place.  
     const exercise = {userName: inputRef.current.value,
     description: document.querySelector('#desc').value,
     duration: document.querySelector('#dur').value,
-    date: document.querySelector('#date').value}
-
-      console.log(" create date type: ", typeof exercise.date)
-    // date: selectedDate}
-    // console.log("New Exercise: ", exercise)
+    // date: document.querySelector('#date').value}
+    date: selectedDate
+  }
 
     createExercise(exercise)
-
-     nav('/')
+    console.log("new exercise: ", exercise)
+    //nav('/')
+  }
+  const onChangeDate = e => {
+    selectedDate =  e.target.value  
+    console.log("onchange date: ", selectedDate)
+    //console.log("inputDateRef.current.value"  , inputDateRef.current.value)
   }
 
-  const onChangeUsername = e => {
-      var userName =  e.target.value  
-      // uName = e.target.value
-      console.log("select user name: ", userName)
-      console.log("input ref current value: ", inputRef.current.value)
-  }
+  const mystyle = {
+    color: "white",
+    backgroundColor: "#5B5EA6",
+    padding: "10px",
+    fontFamily: "Arial",
+    marginLeft: "50px",
+    marginRight: "600px"
+  };
 
-  return (
-   
-    <div>
-      <h3>Create New Fitness Log</h3>  
+  return ( 
+    <div className="form-margin" style={mystyle}>
+      <h3>Create New Fitness Log</h3>  <br/>
       <form onSubmit={newExercise}>
-      <div className="form-group">
-      <label>Member name: </label>
-        <select ref={inputRef}
-                required
-                className="form-control">
 
-                 {/* value={uName}
-                 onChange={onChangeUsername} */}
+        {/* ref is used to get a reference to a DOM element */}
+        <div className="form-group">
+          <select ref={inputRef} 
+                  required
+                  style={{width:"200px"}}
+                  appearance="menulist"
+                  className="form-control">
 
-                {
-                  names.map(function(member) {
-                    return <option 
-                      key={member}
-                      value={member}>{member}
-                      </option>;
-                  })
-              }                    
+                  {/* Populate the dropdown list*/}
+                  { members.map(function(member) {
+                      return <option key={member.userName} value={member.userName}> {member.userName} </option>;
+                    })
+                  } 
           </select> 
-      </div>
-        
-        {/* <input type='text' name='userName' id='uName' placeholder='Member Name' required/><br/> */}
-
-        <div className="form-group">
-          <input type='text' name='description' id='desc' placeholder='Description' required/><br/>
         </div>
 
         <div className="form-group">
-          <input type='number' name='duration' id='dur' min = "10" placeholder='Duration in minutes' required/><br/>
+          <input type='text' 
+          name='description' 
+          id='desc' 
+          placeholder='Description' 
+          required/><br/>
         </div>
 
         <div className="form-group">
-          <input type='date' name='date' id='date' placeholder='Date'  min = '2022-01-01' max = {todayDate}  required/><br/><br/>
+          <input type='number' 
+          name='duration' 
+          id='dur' 
+          min = "10" 
+          placeholder='Duration in minutes' 
+          required/><br/>
         </div>
 
         <div className="form-group">
-          <input type='submit' value="Create Fitness Log" max = {new Date()} className="btn btn-primary"/>
+          <input type='date' 
+          name='date' 
+          id='date' 
+          value={selectedDate}
+          onChange={onChangeDate}
+          max={todayDate} 
+          required/> <br/><br/>
+        </div>
+
+        <div className="form-group">
+          <input type='submit' 
+          value="Create Fitness Log" 
+          className="btn btn-primary"/>
         </div>
 
       </form>

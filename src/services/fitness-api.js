@@ -1,6 +1,5 @@
 
 export const getMembers = () => {
-    console.log("in fitness-api: ")
     const URL = 'http://localhost:3001/members'
     return fetch(URL)
 }
@@ -16,13 +15,11 @@ export const getTheExercise = (id) => {
 }
 
 export const deleteExercise = (id) => {
-    console.log("in fitness-API:", id)
     const URL =  `http://localhost:3001/exercises/${id}`
     return fetch(URL, {method: 'DELETE'})
 }
 
 export const createExercise = (formInput) => {
-    console.log("Form Input: ", formInput)
     const URL = 'http://localhost:3001/exercises/add'
     return fetch(URL, {body:JSON.stringify(formInput), method: 'POST',
         headers: {
@@ -34,7 +31,6 @@ export const createExercise = (formInput) => {
 }
 
 export const editExercise = (formInput,id) => {
-    console.log("in fitness-API/editExercise:", id)
     const URL = `http://localhost:3001/exercises/edit/${id}`
     return fetch(URL, {body: JSON.stringify(formInput), method: 'PUT',
         headers: {
