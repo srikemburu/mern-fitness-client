@@ -13,7 +13,7 @@ import ExerciseList from './components/ExerciseList';
 
 function App() {
   return (
-    <div className="classname">
+    <div className="container">
     <Router>
       <Navbar />
       <br/>

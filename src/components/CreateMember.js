@@ -17,7 +17,7 @@ function CreateMember() {
     backgroundColor: "#DFCFBE",
     padding: "10px",
     fontFamily: "Arial",
-    marginLeft: "50px",
+    marginLeft: "0px",
     marginRight: "600px"
   };
 

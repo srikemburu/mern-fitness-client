@@ -48,7 +48,7 @@ function CreateExercise() {
     backgroundColor: "#5B5EA6",
     padding: "10px",
     fontFamily: "Arial",
-    marginLeft: "50px",
+    marginLeft: "0px",
     marginRight: "600px"
   };
 
@@ -94,7 +94,7 @@ function CreateExercise() {
           <input type='date' 
           name='date' 
           id='date' 
-          value={selectedDate}
+          // value={selectedDate}
           onChange={onChangeDate}
           max={todayDate} 
           required/> <br/><br/>

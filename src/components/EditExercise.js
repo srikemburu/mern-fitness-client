@@ -14,8 +14,9 @@ export default function EditExercise() {
   const [members, setMembers] = useState([])
 
   const [date, setDate] = useState(new Date())
+  //const [selName, setSelName] = useState()
 
-   const inputRef = useRef()  // ref is used to get a reference to a DOM element
+   const inputNameRef = useRef(null)  // ref is used to get a reference to a DOM element
 
   // Add the list of exercises to the state
   useEffect(() => {
@@ -24,10 +25,23 @@ export default function EditExercise() {
     .then(res => setExercise(res))
   },[])
 
-  var selectedName = exercise.userName
-  var selectedDate = new Date(exercise.date)
-  console.log("selected date: ", selectedDate)
 
+  //setSelName(exercise.userName)
+  var selectedName = exercise.userName
+
+  //const options = { year: 'numeric', month: 'short', day: 'numeric' };
+     var localeDate = new Date(exercise.date).toLocaleDateString('fr-CA')
+     console.log("type of locale date: ", typeof localeDate)
+    console.log("locale date: ", localeDate)
+
+    // var outdate  = localedate.replace(/(..).(..).(....)/, "$3-$1-$2"); 
+    // console.log("outdate : ", outdate)
+
+  //   var selectedDate = new Date(exercise.date)
+  //  console.log("selected date : ", selectedDate)
+
+ // var selectedDate = new Date(exercise.date).toISOString().split('T')[0]
+ 
     // Add the list of members to the state
     useEffect(() => {
       getMembers()
@@ -35,24 +49,22 @@ export default function EditExercise() {
       .then(res => setMembers(res))
   },[])
 
- 
-
- // console.log("exercise date: ", typeof exercise.date)
-  // console.log("exercise converted date: ", exercise.date().toISOString().slice(0, 10))
-  
-   console.log(" return date from DB; ", typeof exercise.date)
    console.log("exercise dot date: ", exercise.date)
 
-    //  var rtnDateDB = exercise.date.slice(0, 10)
-  //  console.log("rtn date: ", rtnDateDB)
-
   var todayDate = new Date().toISOString().slice(0, 10)
+  console.log("type of today date: ", typeof todayDate)
   console.log("today date: ", todayDate)
 
   const editTheExercise = e => {
     console.log("in editTheExercise")
-    e.preventDefault()
-    const editedExercise = {userName: inputRef.current.value,
+     e.preventDefault()
+    console.log("input ref current value 2: ", inputNameRef.current.value) 
+    console.log("e target value: ", e.target.value) 
+    //console.log("e target uerName value: ", e.target.userName.value) 
+
+
+    console.log("selected user name 2: ", selectedName)
+    const editedExercise = {userName: selectedName,
                             description: e.target.description.value,
                             duration: e.target.duration.value,
                             date: e.target.date.value}
@@ -62,21 +74,29 @@ export default function EditExercise() {
 
   const onChangeUsername = e => {
     //exercise.userName =  e.target.value  
+    //setSelName(e.target.value)
     selectedName = e.target.value
+
+    const $select = document.querySelector('#mySelect')
+
+    document.getElementById("mySelect").value = selectedName;
+    $select.value = e.target.value
+
+    console.log("$select.value: ", $select.value)
     console.log("selected user name: ", selectedName)
-    console.log("input ref current value: ", inputRef.current.value) 
+    console.log("input ref current value: ", inputNameRef.current.value) 
   }
 
-  const onChangeDate = e => {
-    setDate(e.target.value)
-  }
+  // const onChangeDate = e => {
+  //   setDate(e.target.value)
+  // }
 
   const mystyle = {
     color: "white",
     backgroundColor: "DodgerBlue",
     padding: "10px",
     fontFamily: "Arial",
-    marginLeft: "50px",
+    marginLeft: "0px",
     marginRight: "600px"
   };
 
@@ -87,10 +107,11 @@ export default function EditExercise() {
 
       <label>Member name: </label><br/>
        <div className="form-group">
-            <select ref={inputRef}
+            <select ref={inputNameRef}
+                    id="mySelect"
                     required
                     style={{width:"300px"}}
-                    appearance="menulist"             
+                     appearance="listbox"             
                     className="form-control"
                     value={selectedName}
                     onChange={onChangeUsername}>
@@ -98,8 +119,10 @@ export default function EditExercise() {
                     {/* Populate the dropdown list*/}
                     { 
                       members.map(function(member) {
-                      return <option key={member.userName} value={member.userName}> {member.userName} 
-                      </option>;
+                      return <option key={member.userName} 
+                                      value={member.userName}> 
+                                      {member.userName} 
+                            </option>;
                       })
                     } 
 
@@ -126,7 +149,9 @@ export default function EditExercise() {
           <label>Date: </label><br/>
           <input type='date' 
           name='date' 
-          defaultValue={exercise.date} 
+          defaultValue={localeDate} 
+          max={todayDate} 
+          style={{ width: "300px" }}
           required/>
         </div><br/><br/>
 
@@ -134,7 +159,7 @@ export default function EditExercise() {
           <label>Date: </label>
           <div>
             <DatePicker
-              selected={selectedDate}
+              selected={todayDate}
               onChange={onChangeDate}
             />
           </div>
