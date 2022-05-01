@@ -8,7 +8,7 @@ function CreateExercise() {
   const nav = useNavigate()
   const [members, setMembers] = useState([])
   const inputRef = useRef()  // ref is used to get a reference to a DOM element
-  const inputDateRef = useRef()
+  // const inputDateRef = useRef()
 
   // Add the list of members to the state
   useEffect(() => {
@@ -18,24 +18,22 @@ function CreateExercise() {
 },[])
 
   //const names = members.map(member => member.userName)
-  // console.log("member names: ", names)
-  // var uName = names[0]
 
   const todayDate = new Date().toISOString().slice(0, 10)
   var selectedDate = new Date().toISOString().slice(0, 10)
   
   const newExercise = e => {
-    e.preventDefault()   // prevents the default HTML form submit behavior from taking place.  
-    const exercise = {userName: inputRef.current.value,
-    description: document.querySelector('#desc').value,
-    duration: document.querySelector('#dur').value,
-    // date: document.querySelector('#date').value}
-    date: selectedDate
-  }
+      e.preventDefault()   // prevents the default HTML form submit behavior from taking place.  
+      const exercise = {userName: inputRef.current.value,
+      description: document.querySelector('#desc').value,
+      duration: document.querySelector('#dur').value,
+      // date: document.querySelector('#date').value}
+      date: selectedDate
+    }
 
     createExercise(exercise)
     console.log("new exercise: ", exercise)
-    //nav('/')
+    nav('/')
   }
   const onChangeDate = e => {
     selectedDate =  e.target.value  
@@ -62,12 +60,14 @@ function CreateExercise() {
           <select ref={inputRef} 
                   required
                   style={{width:"200px"}}
-                  appearance="menulist"
-                  className="form-control">
-
+          >
                   {/* Populate the dropdown list*/}
                   { members.map(function(member) {
-                      return <option key={member.userName} value={member.userName}> {member.userName} </option>;
+                      return <option key={member.userName} 
+                                    value={member.userName}
+                             > 
+                                {member.userName} 
+                            </option>;
                     })
                   } 
           </select> 
