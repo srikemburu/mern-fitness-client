@@ -2,7 +2,6 @@
 import {deleteExercise, getExercises} from '../services/fitness-api'
 import {Link} from 'react-router-dom'
 import {useState, useEffect} from 'react'
-//import '../list.css'
 
 export default function ExerciseList() {
     const[exercises, setExercises] = useState([])

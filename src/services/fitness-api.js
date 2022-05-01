@@ -38,7 +38,6 @@ export const editExercise = (formInput,id) => {
             'Content-Type': 'application/json'
         }  
     })
-    // .then(res=>res.json())
 }
 
 export const createMember = (formInput) => {

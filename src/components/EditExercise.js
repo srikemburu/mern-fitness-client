@@ -2,33 +2,25 @@ import React, { useState, useEffect, useRef} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getTheExercise, editExercise, getMembers } from '../services/fitness-api'
 
-// import DatePicker from 'react-date-picker'
-// import "react-date-picker/dist/DatePicker.css"
-// import 'bootstrap/dist/css/bootstrap.min.css'
-
-
 export default function EditExercise() {
   const {id} = useParams()
   const nav = useNavigate()  
   const [exercise, setExercise] = useState({})
   const [members, setMembers] = useState([])
 
-  const [date, setDate] = useState(new Date())
-  const [selectedName, setSelectedName] = useState(null)
+  const [selectedName, setSelectedName] = useState()
 
    const inputNameRef = useRef(null)  // ref is used to get a reference to a DOM element
 
-  // Add the list of exercises to the state
+  // Add the list of exercises to the state. Set selectedName to userName.
   useEffect(() => {
     getTheExercise(id)
     .then(res => res.json())
     .then(res => setExercise(res))
-  },[])
+    setSelectedName(exercise.userName) 
+  },[exercise.userName])
 
-  ////setSelectedName(exercise.userName)  CAUSING TOO MANY RE-RENDERS
-  // var selectedName = exercise.userName
-
-    var prevDate = exercise.date && exercise.date.substring(0,10)
+  var prevDate = exercise.date && exercise.date.substring(0,10)  // Get date in YYYY-MM-DD format
  
     // Add the list of members to the state
     useEffect(() => {
@@ -37,47 +29,22 @@ export default function EditExercise() {
       .then(res => setMembers(res))
   },[])
 
-  var todayDate = new Date().toISOString().slice(0, 10)
+  var todayDate = new Date().toISOString().slice(0, 10)   // Set today date as max date on SELECT
  
+  // Update record in Mongo DB
   const editTheExercise = e => {
-    console.log("in editTheExercise")
-    const filledName = selectedName? selectedName : "Sri";
      e.preventDefault()
-    console.log("input ref current value 2: ", inputNameRef.current.value) 
-    console.log("e target value: ", e.target.value) 
-    //console.log("e target uerName value: ", e.target.userName.value) 
-
-
-    console.log("filledName: ", filledName)
-    console.log("selected user name 2: ", selectedName)
-    console.log("e.target.date: ", e.target.date.value )
-    const editedExercise = {userName: filledName,
+    const editedExercise = {userName: selectedName,
                             description: e.target.description.value,
                             duration: e.target.duration.value,
                             date: e.target.date.value}
     editExercise(editedExercise,id)
-   // nav('/')
+    nav('/')
   }
 
-  const OnChangeUsername = e => {
-   // setSelectedName(e.target.value)
-
-  //  const { name, value } = e.target;
-  //       console.log(`handleChange event: ${e.target.value}`);
-
-    console.log("onchangeUserName e.target.value: ", e.target.value)
-        // setSelectedName(e.target.value) 
-                  
-
-    // useEffect(() => {
-    //   setSelectedName(inputNameRef.current.value) 
-    // },[])
-
-    //exercise.userName =  e.target.value 
-    // selectedName = e.target.value
-    console.log("onchangeUserName selectedName: ", selectedName)
-    console.log("onchangeUserName input ref current value: ", inputNameRef.current.value) 
-  }
+  // const OnChangeUsername = e => {
+  //   setSelectedName(e.target.value)
+  // }
 
   const mystyle = {
     color: "white",
@@ -93,30 +60,25 @@ export default function EditExercise() {
       <h3>Edit Exercise Log</h3><br/>
       <form onSubmit={editTheExercise}>
 
-      <label>Member name: </label><br/>
+        
        <div className="form-group">
+            <label>Member name: </label><br/>
             <select ref={inputNameRef}
-                    //required
-                    style={{width:"300px"}}          
-                    // className="form-control" // hiding arrows on dropdown
-                    value={exercise.userName}
-                  // onChange={OnChangeUsername}
-
+                    required
+                    style={{width:"200px", height:"30px"}}          
+                    // pass state NOT function setState as a value prop
+                    value={selectedName}  
+                   // onChange={OnChangeUsername}                
                     onChange={() => setSelectedName(inputNameRef.current.value)}
-
-
-                   // eslint-disable-next-line react/jsx-no-duplicate-props
-                  //  onChange={useEffect(() => {setSelectedName(inputNameRef.current.value) }, [] ) }
             >
-
                     {/* Populate the dropdown list*/}
                     { 
-                      members.map(function(member, index) {
-                      // if (index === 0) { setSelectedName(member.userName)}
+                      members.map(function(member) {
                       return <option key={member.userName} 
-                                      value={member.userName}> 
-                                      {member.userName} 
-                            </option>;
+                                  value={member.userName}
+                             > 
+                                  {member.userName} 
+                             </option>;
                       })
                     } 
 
@@ -145,19 +107,9 @@ export default function EditExercise() {
           name='date' 
           defaultValue={prevDate} 
           max={todayDate} 
-          style={{ width: "300px" }}
+          style={{ width: "200px" }}
           required/>
         </div><br/><br/>
-
-        {/* <div className="form-group">
-          <label>Date: </label>
-          <div>
-            <DatePicker
-              selected={todayDate}
-              onChange={onChangeDate}
-            />
-          </div>
-        </div> */}
 
         <div className="form-group">
           <input type='submit' 

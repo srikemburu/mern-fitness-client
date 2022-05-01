@@ -2,13 +2,11 @@ import React, { useState, useEffect, useRef } from 'react'
 import {useNavigate} from "react-router-dom"
 import { createExercise, getMembers } from '../services/fitness-api'
 import '../index.css'
-// import '../App.css'
 
 function CreateExercise() {
   const nav = useNavigate()
   const [members, setMembers] = useState([])
   const inputRef = useRef()  // ref is used to get a reference to a DOM element
-  // const inputDateRef = useRef()
 
   // Add the list of members to the state
   useEffect(() => {
@@ -17,28 +15,22 @@ function CreateExercise() {
     .then(res => setMembers(res))
 },[])
 
-  //const names = members.map(member => member.userName)
-
-  const todayDate = new Date().toISOString().slice(0, 10)
-  var selectedDate = new Date().toISOString().slice(0, 10)
+  const todayDate = new Date().toISOString().slice(0, 10)  // Used to set Max date
+  var selectedDate = new Date().toISOString().slice(0, 10)  // Date selected by user
   
   const newExercise = e => {
       e.preventDefault()   // prevents the default HTML form submit behavior from taking place.  
       const exercise = {userName: inputRef.current.value,
       description: document.querySelector('#desc').value,
       duration: document.querySelector('#dur').value,
-      // date: document.querySelector('#date').value}
       date: selectedDate
     }
 
-    createExercise(exercise)
-    console.log("new exercise: ", exercise)
-    nav('/')
+  createExercise(exercise)
+  nav('/')
   }
   const onChangeDate = e => {
     selectedDate =  e.target.value  
-    console.log("onchange date: ", selectedDate)
-    //console.log("inputDateRef.current.value"  , inputDateRef.current.value)
   }
 
   const mystyle = {
@@ -59,7 +51,7 @@ function CreateExercise() {
         <div className="form-group">
           <select ref={inputRef} 
                   required
-                  style={{width:"200px"}}
+                  style={{width:"200px", height:"30px"}}
           >
                   {/* Populate the dropdown list*/}
                   { members.map(function(member) {
@@ -78,6 +70,7 @@ function CreateExercise() {
           name='description' 
           id='desc' 
           placeholder='Description' 
+          style={{ width: "200px" }}
           required/><br/>
         </div>
 
@@ -87,6 +80,7 @@ function CreateExercise() {
           id='dur' 
           min = "10" 
           placeholder='Duration in minutes' 
+          style={{ width: "200px" }}
           required/><br/>
         </div>
 
@@ -94,9 +88,9 @@ function CreateExercise() {
           <input type='date' 
           name='date' 
           id='date' 
-          // value={selectedDate}
           onChange={onChangeDate}
           max={todayDate} 
+          style={{ width: "200px" }}
           required/> <br/><br/>
         </div>
 
