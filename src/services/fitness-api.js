@@ -1,26 +1,26 @@
 
 export const getMembers = () => {
-    const URL = 'http://localhost:3001/members'
+    const URL = 'skfitnessapi.herokuapp.com/members'
     return fetch(URL)
 }
 
 export const getExercises = () => {
-    const URL = 'http://localhost:3001/exercises'
+    const URL = 'skfitnessapi.herokuapp.com/exercises'
     return fetch(URL)
 }
 
 export const getTheExercise = (id) => {
-    const URL = `http://localhost:3001/exercises/${id}`
+    const URL = `skfitnessapi.herokuapp.com/exercises/${id}`
     return fetch(URL)
 }
 
 export const deleteExercise = (id) => {
-    const URL =  `http://localhost:3001/exercises/${id}`
+    const URL =  `skfitnessapi.herokuapp.com/exercises/${id}`
     return fetch(URL, {method: 'DELETE'})
 }
 
 export const createExercise = (formInput) => {
-    const URL = 'http://localhost:3001/exercises/add'
+    const URL = 'skfitnessapi.herokuapp.com/exercises/add'
     return fetch(URL, {body:JSON.stringify(formInput), method: 'POST',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -31,7 +31,7 @@ export const createExercise = (formInput) => {
 }
 
 export const editExercise = (formInput,id) => {
-    const URL = `http://localhost:3001/exercises/edit/${id}`
+    const URL = `skfitnessapi.herokuapp.com/exercises/edit/${id}`
     return fetch(URL, {body: JSON.stringify(formInput), method: 'PUT',
         headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -41,7 +41,7 @@ export const editExercise = (formInput,id) => {
 }
 
 export const createMember = (formInput) => {
-    const URL = 'http://localhost:3001/members/add'
+    const URL = 'skfitnessapi.herokuapp.com/members/add'
     return fetch(URL, {body:JSON.stringify(formInput), method: 'POST',
         headers: {
             'Accept': 'application/json, text/plain, */*',
