@@ -26,9 +26,10 @@ function CreateExercise() {
       date: selectedDate
     }
 
-  createExercise(exercise)
-  nav('/')
+      createExercise(exercise)
+      nav('/')
   }
+
   const onChangeDate = e => {
     selectedDate =  e.target.value  
   }
@@ -39,7 +40,7 @@ function CreateExercise() {
     padding: "10px",
     fontFamily: "Arial",
     marginLeft: "0px",
-    marginRight: "600px"
+    marginRight: "800px"
   };
 
   return ( 

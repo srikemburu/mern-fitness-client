@@ -14,11 +14,11 @@ function CreateMember() {
 
   const mystyle = {
     color: "white",
-    backgroundColor: "#DFCFBE",
+    backgroundColor: "#FDAC53",
     padding: "10px",
     fontFamily: "Arial",
     marginLeft: "0px",
-    marginRight: "600px"
+    marginRight: "800px"
   };
 
   return (  

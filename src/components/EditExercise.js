@@ -18,7 +18,7 @@ export default function EditExercise() {
     .then(res => res.json())
     .then(res => setExercise(res))
     setSelectedName(exercise.userName) 
-  },[exercise.userName])
+  },[exercise.userName])             // Only re-run the effect if userName changes
 
   var prevDate = exercise.date && exercise.date.substring(0,10)  // Get date in YYYY-MM-DD format
  
@@ -27,7 +27,7 @@ export default function EditExercise() {
       getMembers()
       .then(res => res.json())
       .then(res => setMembers(res))
-  },[])
+  },[])   // An empty array ([]) as a second argument tells React that your effect doesn’t depend on any values from props or state, so it never needs to re-run.
 
   var todayDate = new Date().toISOString().slice(0, 10)   // Set today date as max date on SELECT
  
@@ -42,33 +42,27 @@ export default function EditExercise() {
     nav('/')
   }
 
-  // const OnChangeUsername = e => {
-  //   setSelectedName(e.target.value)
-  // }
-
   const mystyle = {
     color: "white",
     backgroundColor: "DodgerBlue",
     padding: "10px",
     fontFamily: "Arial",
     marginLeft: "0px",
-    marginRight: "600px"
+    marginRight: "800px"
   };
 
   return (
     <div className="form-margin" style={mystyle}>
       <h3>Edit Exercise Log</h3><br/>
       <form onSubmit={editTheExercise}>
-
-        
+       
        <div className="form-group">
             <label>Member name: </label><br/>
             <select ref={inputNameRef}
                     required
                     style={{width:"200px", height:"30px"}}          
                     // pass state NOT function setState as a value prop
-                    value={selectedName}  
-                   // onChange={OnChangeUsername}                
+                    value={selectedName}                 
                     onChange={() => setSelectedName(inputNameRef.current.value)}
             >
                     {/* Populate the dropdown list*/}
