@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Fitness Tracker MERN Stack App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## This is a Fitness tracking app with full CRUD using Mongoose
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### The MERN stack consists of the following technologies:
 
-### `npm start`
+- **MongoDB:** A document-based open source database. We’ll be hosting our database in the cloud using MongoDB Atlas and Google Cloud Platform.
+- **Express:** A web application framework for Node.js
+- **React:** A javaScript front-end library for building user interfaces.
+- **Node.js:** JavaScript run-time environment that executes JavaScript code outside of a browser (such as a server).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Additional technologies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Bootstrap:** CSS Framework for developing responsive and mobile-first websites.
 
-### `npm test`
+- **Mongoose:** Simple, schema-bassed solution to model application data
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Application Function
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Fitness Tracker is a fitness tracking app, an MVC application with **RESTful** Applications.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+It has the following functionality:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Create Members
+2. Create Exercises
+3. An Exercises Index page to show all Exercises
+4. Edit Exercises
+5. Delete Exercises
 
-### `npm run eject`
+### The User Stories
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. The landing page has a navigation bar at the top with **Exercises**, **Create Exercise Log**, and **Create Member** links.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. When a user goes to the **/** route they will see an index of exercises.The exercise info of each exercise rendered to the page.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Each Exercise on the index page has an **Edit & Delete** links. The Edit link takes you to Edit page with the information populated. The User can make changes and update the document. The Delete link deletes the document and refreshes the Index Page.
 
-## Learn More
+### Technologies Used
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. JavaScript
+2. HTML 5
+3. CSS 3
+4. JSX
+5. Mongo DB/Mongoose
+6. Express
+7. React JS
+8. Node JS
+9. CSS Bootstrap
 
-### Code Splitting
+### How to Install Fitness Tracker
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+- Fork and clone this repository to you machine
+- Change into the new directory
+- Run **npm install** in a terminal
+- Run NPM START to start the webserver
+- Lastly, open a browser window, and navigate to **http:localhost:3001** to start the application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Future plans for Fitness Tracker
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+I would like to add functionality to pull up exercises for each person
 
-### Advanced Configuration
+### heroku link for front end: https://skfitnessclient.herokuapp.com/
+### heroku link for back end: https://skfitnessapi.herokuapp.com/exercises
+### heroku link for back end: https://skfitnessapi.herokuapp.com/members
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### github link for Backend: https://github.com/srikemburu/mern-fitness-api
 
-### Deployment
+### github link for Frontend: https://github.com/srikemburu/mern-fitness-client
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
